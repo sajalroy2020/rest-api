@@ -11,14 +11,13 @@ use App\Http\Controllers\BaseController;
 class AuthController extends BaseController
 {
     public function register(RegisterRequest $request){
-        dd('ok');
-        // $validateData = $request->validated();
+        $validateData = $request->validated();
 
-        // if (User::create($validateData)) {
-        //     $success['token'] = $validateData->createToken('restAPI')->plainTextToken;
-        //     $success['name'] = $validateData->name;
-        //     return $this->sendResponse($success, 'you have been registerd successfully');
-        // }
-        // return $this->sendError('something went rong !..', errors());
+        if (User::create($validateData)) {
+            $success['token'] = $validateData->createToken('restAPI')->plainTextToken;
+            $success['name'] = $validateData->name;
+            return $this->sendResponse($success, 'you have been registerd successfully');
+        }
+        return $this->sendError('something went rong !..', errors());
     }
 }
