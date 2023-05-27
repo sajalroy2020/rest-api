@@ -25,7 +25,8 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 
 // user protected route
 Route::group(['middleware'=>'auth:sanctum'], function() {
-    // Route::post('product', [ProductController::class, 'product'])->name('product');
+    Route::get('product', [ProductController::class, 'product'])->name('product');
+    Route::post('product-store', [ProductController::class, 'productStore'])->name('product_store');
+    Route::get('product-edit/{id}', [ProductController::class, 'productEdit'])->name('product_edit');
 });
 
-Route::get('product', [ProductController::class, 'product'])->name('product');
