@@ -22,11 +22,14 @@ use App\Http\Controllers\api\ProductController;
 
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 // user protected route
 Route::group(['middleware'=>'auth:sanctum'], function() {
     Route::get('product', [ProductController::class, 'product'])->name('product');
     Route::post('product-store', [ProductController::class, 'productStore'])->name('product_store');
     Route::get('product-edit/{id}', [ProductController::class, 'productEdit'])->name('product_edit');
+    Route::post('product-update/{id}', [ProductController::class, 'productUpdate'])->name('product_update');
+    Route::get('product-delete/{id}', [ProductController::class, 'productDelete'])->name('product_delete');
 });
 
